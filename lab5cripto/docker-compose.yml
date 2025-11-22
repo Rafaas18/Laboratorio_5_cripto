@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Cliente 1 - Ubuntu 16.10
+  c1:
+    build: ./c1
+    container_name: c1
+    hostname: c1
+    networks:
+      - red_lab5
+    command: tail -f /dev/null
+
+  # Cliente 2 - Ubuntu 18.10
+  c2:
+    build: ./c2
+    container_name: c2
+    hostname: c2
+    networks:
+      - red_lab5
+    command: tail -f /dev/null
+
+  # Cliente 3 - Ubuntu 20.10
+  c3:
+    build: ./c3
+    container_name: c3
+    hostname: c3
+    networks:
+      - red_lab5
+    command: tail -f /dev/null
+
+  # Cliente 4 / Servidor 1 - Ubuntu 22.10
+  s1:
+    build: ./s1
+    container_name: s1
+    hostname: s1
+    networks:
+      - red_lab5
+    # Este comando inicia el servidor SSH
+    command: /usr/sbin/sshd -D
+    expose:
+      - "22"
+
+networks:
+  red_lab5:
+    driver: bridge
